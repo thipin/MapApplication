@@ -43,4 +43,8 @@ public class ApiUrl {
         return BASEURL + "hospital_detail.php?id=" + id;
     }
 
+    public static String del_hospital(int id) {
+        return BASEURL + "del_hospital.php?id=" + id;
+    }
+
 }

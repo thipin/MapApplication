@@ -81,7 +81,6 @@ public class HomeActivity extends AppCompatActivity {
                     public void onCompleted(Exception e, final ArrayList<Listname> result) {
                         if (e != null) {
                             e.printStackTrace();
-                            Log.d("URL", ApiUrl.appove_hospital());
                             Toast.makeText(getApplicationContext(), "การเชื่อมต่อมีปัญหา", Toast.LENGTH_SHORT).show();
                         } else {
                             for (Listname list : result) {
