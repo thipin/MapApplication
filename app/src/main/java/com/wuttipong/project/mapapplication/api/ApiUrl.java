@@ -39,4 +39,8 @@ public class ApiUrl {
         return BASEURL + "auto_map.php";
     }
 
+    public static String hospital_detail(int id) {
+        return BASEURL + "hospital_detail.php?id=" + id;
+    }
+
 }
