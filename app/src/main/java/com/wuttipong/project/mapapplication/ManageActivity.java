@@ -1,12 +1,14 @@
 package com.wuttipong.project.mapapplication;
 
 import android.app.ProgressDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -18,6 +20,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.wuttipong.project.mapapplication.api.ApiUrl;
 import com.wuttipong.project.mapapplication.model.Listname;
+import com.wuttipong.project.mapapplication.model.Success;
 
 import java.util.ArrayList;
 
@@ -77,6 +80,36 @@ public class ManageActivity extends AppCompatActivity {
                                         startActivity(intent);
                                     }
                                 });
+
+                                listView.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+                                    @Override
+                                    public boolean onItemLongClick(AdapterView<?> parent, View view, final int position, long id) {
+                                        android.support.v7.app.AlertDialog.Builder builder = new android.support.v7.app.AlertDialog.Builder(ManageActivity.this);
+
+                                        builder.setTitle("ยืนยันการลบ");
+                                        builder.setMessage("คุณต้องลบสถานพยาบาลนี้หรือไม่");
+                                        builder.setCancelable(false);
+
+                                        builder.setPositiveButton("ยันยัน", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialogInterface, int i) {
+                                                dialogInterface.dismiss();
+                                                deleteHospital(result.get(position).getHospitalId());
+                                            }
+                                        });
+
+                                        builder.setNegativeButton("ยกเลิก", new DialogInterface.OnClickListener() {
+                                            @Override
+                                            public void onClick(DialogInterface dialog, int which) {
+                                                dialog.dismiss();
+                                            }
+                                        });
+                                        android.support.v7.app.AlertDialog dialog = builder.create();
+                                        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+                                        dialog.show();
+                                        return true;
+                                    }
+                                });
                             }
                         }
 
@@ -85,6 +118,34 @@ public class ManageActivity extends AppCompatActivity {
                     }
                 });
     }
+
+    private void deleteHospital(int id) {
+        Log.d("CHECK",ApiUrl.del_hospital(id));
+        showProgress();
+        Ion.with(getApplicationContext())
+                .load(ApiUrl.del_hospital(id))
+                .as(new TypeToken<Success>() {
+                })
+                .setCallback(new FutureCallback<Success>() {
+                    @Override
+                    public void onCompleted(Exception e, Success result) {
+                        hideProgress();
+                        if (e != null) {
+                            e.printStackTrace();
+                        } else {
+                            if (result.getSuccess()) {
+                                Toast.makeText(ManageActivity.this, "ลบข้อมูลกสำเร็จ", Toast.LENGTH_SHORT).show();
+                                finish();
+                                startActivity(getIntent());
+                                return;
+                            }
+
+                        }
+                        Toast.makeText(ManageActivity.this, "ไม่พบข้อมูล", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
 
     private class dataAdapter extends BaseAdapter {
 
