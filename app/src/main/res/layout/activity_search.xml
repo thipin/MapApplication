@@ -77,10 +77,16 @@
                 android:paddingLeft="20dp">
 
                 <RadioButton
-                    android:id="@+id/rbA1"
+                    android:id="@+id/rbA0"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
+                    android:text="ทุกประเภท" />
+
+                <RadioButton
+                    android:id="@+id/rbA1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:text="โรงพยาบาล" />
 
                 <RadioButton
@@ -106,7 +112,7 @@
                 android:textColorHint="@color/colorPrimary" />
 
             <Button
-                android:id="@+id/btnSave"
+                android:id="@+id/btn_search"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="5dp"

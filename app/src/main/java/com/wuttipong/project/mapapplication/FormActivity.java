@@ -61,8 +61,8 @@ public class FormActivity extends BaseActivity {
     @BindView(R.id.gallary)
     ImageButton gallary;
     private ArrayAdapter<String> arrayAdapter;
-    String[] SPINNERLIST = {"t1", "t2", "t3", "t4"};
-    String[] SPECIFIC = {"t11", "t22", "t33", "t44"};
+    String[] SPINNERLIST;
+    String[] SPECIFIC;
     List<Amphoe> amphoeList;
     private List<Specific> specificList;
     private File file;
