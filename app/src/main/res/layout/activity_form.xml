@@ -86,13 +86,12 @@
             </android.support.design.widget.TextInputLayout>
 
 
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/amphoe"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="อำเภอ"
-                android:textColorHint="@color/colorPrimary"
-                app:met_floatingLabel="normal" />
+                android:textColorHint="@color/colorPrimary" />
 
             <TextView
                 android:layout_width="match_parent"
@@ -128,20 +127,19 @@
             </RadioGroup>
 
 
-            <com.weiwangcn.betterspinner.library.material.MaterialBetterSpinner
+            <android.support.v7.widget.AppCompatSpinner
                 android:id="@+id/select"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="เฉพาะทาง"
-                android:textColorHint="@color/colorPrimary"
-                app:met_floatingLabel="normal" />
+                android:textColorHint="@color/colorPrimary" />
 
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
-                <EditText
-                    android:id="@+id/etLocaltion"
+                <TextView
+                    android:id="@+id/tvLocaltion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:drawablePadding="10dp"

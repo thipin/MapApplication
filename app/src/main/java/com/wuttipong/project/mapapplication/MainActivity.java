@@ -1,11 +1,16 @@
 package com.wuttipong.project.mapapplication;
 
+import android.Manifest;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
 
+import permissions.dispatcher.NeedsPermission;
+import permissions.dispatcher.RuntimePermissions;
+
+@RuntimePermissions
 public class MainActivity extends AppCompatActivity {
 
     private ImageButton btnAdmin;
@@ -22,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
         btnAuto = (ImageButton) findViewById(R.id.btn_auto);
         btnSearch = (ImageButton) findViewById(R.id.btn_search);
         btnAdd = (ImageButton) findViewById(R.id.btn_add);
-
         btnAdmin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         btnAuto.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                MainActivityPermissionsDispatcher.startMapWithCheck(MainActivity.this);
             }
         });
 
@@ -57,5 +61,11 @@ public class MainActivity extends AppCompatActivity {
         });
 
 
+    }
+
+    @NeedsPermission(Manifest.permission.ACCESS_FINE_LOCATION)
+    public void startMap() {
+        Intent intent = new Intent(MainActivity.this, MapsActivity.class);
+        startActivity(intent);
     }
 }
