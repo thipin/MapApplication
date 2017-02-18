@@ -23,5 +23,20 @@ public class ApiUrl {
         return BASEURL + "add_hospital.php";
     }
 
+    public static String list_hospital() {
+        return BASEURL + "list_hospital.php";
+    }
+
+    public static String appove_hospital() {
+        return BASEURL + "appove_hospital.php";
+    }
+
+    public static String search_hospital() {
+        return BASEURL + "search_hospital.php";
+    }
+
+    public static String auto_map() {
+        return BASEURL + "auto_map.php";
+    }
 
 }
