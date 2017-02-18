@@ -1,7 +1,7 @@
 package com.wuttipong.project.mapapplication.api;
 
 public class ApiUrl {
-    public static final String BASEURL = "http://192.168.1.101/map/api/";
+    public static final String BASEURL = "http://tub.theend3.com/api/";
 
     public static String login() {
         return BASEURL + "login.php";
