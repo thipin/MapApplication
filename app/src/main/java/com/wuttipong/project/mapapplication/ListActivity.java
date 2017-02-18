@@ -38,7 +38,7 @@ public class ListActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Log.d("id", "onItemClick "+id);
                 Intent intent = new Intent(ListActivity.this,DetailActivity.class);
-//                intent.putExtra()
+                intent.putExtra("hospitalID",(int) id);
                 startActivity(intent);
             }
         });

@@ -1,22 +1,24 @@
 package com.wuttipong.project.mapapplication;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
-import com.squareup.picasso.Picasso;
 import com.wuttipong.project.mapapplication.api.ApiUrl;
 import com.wuttipong.project.mapapplication.model.HospitalDetail;
-
-import static com.wuttipong.project.mapapplication.R.id.img;
 
 public class DetailActivity extends AppCompatActivity {
 
@@ -44,7 +46,16 @@ public class DetailActivity extends AppCompatActivity {
         txtSpecific = (TextView) findViewById(R.id.txt_specific);
         txtTel = (TextView) findViewById(R.id.txt_tel);
         txtWeb = (TextView) findViewById(R.id.txt_web);
-
+        ImageButton map = (ImageButton) findViewById(R.id.btn_map);
+        map.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+            Uri gmmIntentUri = Uri.parse("google.navigation:q="+detail.getHospitalLocaltion());
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+        });
 
         hospitalID = getIntent().getIntExtra("hospitalID",0);
 
@@ -78,7 +89,7 @@ public class DetailActivity extends AppCompatActivity {
                             txtWeb.setText(result.getHospitalWeb());
 
                             if (!TextUtils.isEmpty(result.getHospitalImg())) {
-                                Picasso.with(getApplicationContext()).load(result.getAmphoeId()).into(img);
+                                Glide.with(getApplicationContext()).load(result.getHospitalImg()).into(img);
                             }
 
                         }

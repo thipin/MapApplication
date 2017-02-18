@@ -248,7 +248,7 @@ public class FormActivity extends BaseActivity {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(data, this);
                 String toastMsg = String.format("Place: %s", place.getName());
-                location = String.valueOf(place.getLatLng().latitude) + String.valueOf(place.getLatLng().longitude);
+                location = String.valueOf(place.getLatLng().latitude) +","+ String.valueOf(place.getLatLng().longitude);
                 Toast.makeText(this, toastMsg, Toast.LENGTH_LONG).show();
             }
         }
