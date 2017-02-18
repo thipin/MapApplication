@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.wuttipong.project.mapapplication">
 
+    <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -21,7 +23,8 @@
         <activity android:name=".ListActivity" />
         <activity android:name=".DetailActivity" />
         <activity android:name=".HomeActivity" />
-        <activity android:name=".ManageActivity"></activity>
+        <activity android:name=".ManageActivity" />
+        <activity android:name=".AppoveActivity"></activity>
     </application>
 
 </manifest>

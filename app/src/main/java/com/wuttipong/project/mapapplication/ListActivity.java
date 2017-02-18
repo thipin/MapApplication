@@ -67,7 +67,7 @@ public class ListActivity extends AppCompatActivity {
             if (convertView==null){
                 mHolder = new ViewHolder();
                 convertView = getLayoutInflater().inflate(R.layout.list_item,parent,false);
-                mHolder.textView = (TextView)convertView.findViewById(R.id.txt);
+                mHolder.textView = (TextView)convertView.findViewById(R.id.txt_name);
                 convertView.setTag(mHolder);
             }else {
                 mHolder = (ViewHolder) convertView.getTag();
