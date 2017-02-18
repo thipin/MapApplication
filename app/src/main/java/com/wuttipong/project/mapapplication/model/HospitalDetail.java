@@ -13,7 +13,7 @@ public class HospitalDetail {
     private String hospitalName;
     @SerializedName("hospital_tel")
     @Expose
-    private Integer hospitalTel;
+    private String hospitalTel;
     @SerializedName("hospital_web")
     @Expose
     private String hospitalWeb;
@@ -61,11 +61,11 @@ public class HospitalDetail {
         this.hospitalName = hospitalName;
     }
 
-    public Integer getHospitalTel() {
+    public String getHospitalTel() {
         return hospitalTel;
     }
 
-    public void setHospitalTel(Integer hospitalTel) {
+    public void setHospitalTel(String hospitalTel) {
         this.hospitalTel = hospitalTel;
     }
 
