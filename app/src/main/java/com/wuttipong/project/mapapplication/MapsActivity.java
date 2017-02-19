@@ -33,6 +33,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -228,12 +229,13 @@ public class MapsActivity extends BaseActivity implements
 
         mLastLocation = location;
         mLatLng = new LatLng(location.getLatitude(), location.getLongitude());
-//            if (!isUpdateLocation) {
         loadData();
         mMap.moveCamera(CameraUpdateFactory.newLatLng(mLatLng));
-//            }
-
-//            isUpdateLocation = true;
+        mMap.addMarker(new MarkerOptions()
+                .position(mLatLng)
+                .icon(BitmapDescriptorFactory.fromResource(R.drawable.current_marker))
+                .anchor(0.5f, 0.5f)
+        );
         stopLocationUpdates();
     }
 
