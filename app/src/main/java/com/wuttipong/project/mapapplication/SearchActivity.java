@@ -41,7 +41,6 @@ public class SearchActivity extends BaseActivity {
     RadioGroup radio;
     @BindView(R.id.select)
     AppCompatSpinner select;
-    private Button btnSave;
 
     private ArrayAdapter<String> arrayAdapter;
     String[] SPINNERLIST;
@@ -62,7 +61,7 @@ public class SearchActivity extends BaseActivity {
         radio.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup radioGroup, int i) {
-                typeID = radioGroup.indexOfChild(findViewById(i)) + 1;
+                typeID = radioGroup.indexOfChild(findViewById(i));
             }
         });
     }
@@ -140,15 +139,23 @@ public class SearchActivity extends BaseActivity {
 
     private void search() {
 
+        int amphoe_id = 0;
+        int specific_id = 0;
+
+        if (amphoe.getSelectedItemPosition() > 0){
+            amphoe_id = amphoeList.get(amphoe.getSelectedItemPosition()-1).getAmphoeId();
+        }
+
+        if (select.getSelectedItemPosition() > 0){
+            specific_id = specificList.get(select.getSelectedItemPosition()-1).getSpecificId();
+        }
+
 
         Intent intent = new Intent(SearchActivity.this, ListActivity.class);
-        intent.putExtra("amphoe_id", amphoeList.get(amphoe.getSelectedItemPosition()).getAmphoeId());
+        intent.putExtra("amphoe_id", amphoe_id);
         intent.putExtra("type_id", typeID);
-        intent.putExtra("specific_id", specificList.get(select.getSelectedItemPosition()).getSpecificId());
+        intent.putExtra("specific_id", specific_id);
         intent.putExtra("name", etName.getText().toString());
         startActivity(intent);
-
-
-
     }
 }
