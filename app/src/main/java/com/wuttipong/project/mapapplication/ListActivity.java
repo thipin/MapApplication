@@ -46,6 +46,8 @@ public class ListActivity extends AppCompatActivity {
         specificID = getIntent().getIntExtra("specific_id", 0);
         name = getIntent().getStringExtra("name");
 
+        Toast.makeText(getApplicationContext(), "a=" + amphoeID + ",t=" + typeID + ",s=" + specificID + "n=" + name, Toast.LENGTH_SHORT).show();
+
         listView = (ListView) findViewById(R.id.listview);
         txtNotfound = (TextView) findViewById(R.id.txt_not_found);
 
@@ -64,7 +66,7 @@ public class ListActivity extends AppCompatActivity {
     private void loadData() {
         showProgress();
         Ion.with(getApplicationContext())
-                .load(ApiUrl.list_hospital())
+                .load(ApiUrl.search_hospital())
                 .setBodyParameter("name", name)
                 .setBodyParameter("amphoe_id", String.valueOf(amphoeID))
                 .setBodyParameter("type_id", String.valueOf(typeID))
