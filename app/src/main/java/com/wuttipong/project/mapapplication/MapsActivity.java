@@ -152,6 +152,8 @@ public class MapsActivity extends BaseActivity implements
             }
 //            marker.setInfoWindowAnchor(0.1f, 0f);
             Listname listname = (Listname) marker.getTag();
+            if (listname ==null)
+                return null;
             final ImageView img = (ImageView) view.findViewById(R.id.img);
             TextView name = (TextView) view.findViewById(R.id.txt_name);
             name.setText(listname.getHospitalName());

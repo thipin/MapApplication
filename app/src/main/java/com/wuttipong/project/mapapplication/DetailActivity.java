@@ -61,6 +61,33 @@ public class DetailActivity extends AppCompatActivity {
 
         loadData();
 
+        txtWeb.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TextUtils.isEmpty(detail.getHospitalWeb())) {
+                    String url = detail.getHospitalWeb();
+                    if (!url.startsWith("http")){
+                        url = "http://"+url;
+                    }
+                    Intent i = new Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse(url));
+                    startActivity(i);
+                }
+            }
+        });
+
+        txtTel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (!TextUtils.isEmpty(detail.getHospitalTel())) {
+                    Intent i = new Intent(Intent.ACTION_DIAL);
+                    i.setData(Uri.parse("tel:"+detail.getHospitalTel()));
+                    startActivity(i);
+                }
+            }
+        });
+
+
 
     }
 
