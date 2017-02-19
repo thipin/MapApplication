@@ -7,19 +7,22 @@ import com.google.gson.annotations.SerializedName;
 public class Listname {
     @SerializedName("hospital_id")
     @Expose
-    private Integer hospitalId;
+    private int hospitalId;
     @SerializedName("hospital_name")
     @Expose
     private String hospitalName;
     @SerializedName("hospital_localtion")
     @Expose
     private String hospitalLocaltion;
+    @SerializedName("hospital_img")
+    @Expose
+    private String hospitalImg;
 
-    public Integer getHospitalId() {
+    public int getHospitalId() {
         return hospitalId;
     }
 
-    public void setHospitalId(Integer hospitalId) {
+    public void setHospitalId(int hospitalId) {
         this.hospitalId = hospitalId;
     }
 
@@ -37,5 +40,13 @@ public class Listname {
 
     public void setHospitalLocaltion(String hospitalLocaltion) {
         this.hospitalLocaltion = hospitalLocaltion;
+    }
+
+    public String getHospitalImg() {
+        return hospitalImg;
+    }
+
+    public void setHospitalImg(String hospitalImg) {
+        this.hospitalImg = hospitalImg;
     }
 }
