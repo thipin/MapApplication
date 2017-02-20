@@ -112,8 +112,8 @@ public class DetailActivity extends AppCompatActivity {
                             txtAmphoe.setText(result.getAmphoeName());
                             txtType.setText(result.getTypeName());
                             txtSpecific.setText(result.getSpecificName());
-                            txtTel.setText(result.getHospitalTel()+"");
-                            txtWeb.setText(result.getHospitalWeb());
+                            txtTel.setText(result.getHospitalTel()+" [ โทร ]");
+                            txtWeb.setText(result.getHospitalWeb() +" [ เข้าเว็บ ]");
 
                             if (!TextUtils.isEmpty(result.getHospitalImg())) {
                                 Glide.with(getApplicationContext()).load(result.getHospitalImg()).into(img);
