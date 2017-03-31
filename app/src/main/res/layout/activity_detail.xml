@@ -93,12 +93,12 @@
                     android:id="@+id/txt_amphoe"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/icon1"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/icon1"
                     android:paddingLeft="15dp"
                     android:text="อำเภอ"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -118,12 +118,12 @@
                     android:id="@+id/txt_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/icon2"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/icon2"
                     android:paddingLeft="15dp"
                     android:text="ประเภท"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -143,12 +143,12 @@
                     android:id="@+id/txt_specific"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/icon3"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/icon3"
                     android:paddingLeft="15dp"
                     android:text="เฉพาะทาง"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -168,12 +168,12 @@
                     android:id="@+id/txt_tel"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/icon4"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/icon4"
                     android:paddingLeft="15dp"
                     android:text="เบอร์โทร"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -193,18 +193,24 @@
                     android:id="@+id/txt_web"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_toRightOf="@+id/icon5"
                     android:layout_centerVertical="true"
+                    android:layout_toRightOf="@+id/icon5"
                     android:paddingLeft="15dp"
                     android:text="เว็บไซต์"
                     android:textColor="@android:color/black"
-                    android:textSize="16sp"/>
+                    android:textSize="16sp" />
             </RelativeLayout>
+
+            <Button
+                android:id="@+id/btn_edit"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="16dp"
+                android:gravity="center"
+                android:text="แก้ไข"/>
 
         </LinearLayout>
     </ScrollView>
-
-
 
 
 </LinearLayout>

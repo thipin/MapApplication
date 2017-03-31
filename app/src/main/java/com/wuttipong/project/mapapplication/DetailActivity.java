@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -46,6 +47,7 @@ public class DetailActivity extends AppCompatActivity {
         txtSpecific = (TextView) findViewById(R.id.txt_specific);
         txtTel = (TextView) findViewById(R.id.txt_tel);
         txtWeb = (TextView) findViewById(R.id.txt_web);
+        Button btn_edit = (Button) findViewById(R.id.btn_edit);
         ImageButton map = (ImageButton) findViewById(R.id.btn_map);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +86,15 @@ public class DetailActivity extends AppCompatActivity {
                     i.setData(Uri.parse("tel:"+detail.getHospitalTel()));
                     startActivity(i);
                 }
+            }
+        });
+
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DetailActivity.this, FormEditActivity.class);
+                intent.putExtra("hospitalID",hospitalID);
+                startActivity(intent);
             }
         });
 

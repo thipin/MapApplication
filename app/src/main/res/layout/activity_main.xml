@@ -27,6 +27,12 @@
             android:layout_margin="10dp"
             android:background="@android:color/transparent"
             android:src="@drawable/admin" />
+
+        <ImageView
+            android:id="@+id/img_badge"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignLeft="@+id/btn_admin"/>
     </RelativeLayout>
 
 

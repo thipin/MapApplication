@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -25,6 +26,7 @@ import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
 import com.wuttipong.project.mapapplication.api.ApiUrl;
 import com.wuttipong.project.mapapplication.model.Amphoe;
+import com.wuttipong.project.mapapplication.model.HospitalDetail;
 import com.wuttipong.project.mapapplication.model.Specific;
 
 import java.io.File;
@@ -39,7 +41,7 @@ import pl.aprilapps.easyphotopicker.DefaultCallback;
 import pl.aprilapps.easyphotopicker.EasyImage;
 
 @RuntimePermissions
-public class FormActivity extends BaseActivity {
+public class FormEditActivity extends BaseActivity {
 
 
     int PLACE_PICKER_REQUEST = 1;
@@ -68,12 +70,15 @@ public class FormActivity extends BaseActivity {
     private File file;
     private String location;
     private int typeID = 1;
+    private int hospitalID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form);
         ButterKnife.bind(this);
+
+        hospitalID = getIntent().getIntExtra("hospitalID",0);
 
         showProgress();
 
@@ -124,7 +129,6 @@ public class FormActivity extends BaseActivity {
                     public void onCompleted(Exception e, List<Specific> result) {
                         if (e != null) {
                             e.printStackTrace();
-                            hideProgress();
                             Toast.makeText(getApplicationContext(), "การเชื่อมต่อมีปัญหา", Toast.LENGTH_SHORT).show();
                         } else {
                             specificList = result;
@@ -134,8 +138,52 @@ public class FormActivity extends BaseActivity {
                             }
 
                             setSpinner();
+                            loadData();
+                        }
+                    }
+                });
+    }
+
+
+    private void loadData() {
+        Log.d("URL",ApiUrl.hospital_detail(hospitalID));
+        Ion.with(getApplicationContext())
+                .load(ApiUrl.hospital_detail(hospitalID))
+                .as(new TypeToken<HospitalDetail>() {
+                })
+                .setCallback(new FutureCallback<HospitalDetail>() {
+                    @Override
+                    public void onCompleted(Exception e, HospitalDetail result) {
+                        hideProgress();
+                        if (e != null) {
+                            e.printStackTrace();
+                            Toast.makeText(getApplicationContext(), "การเชื่อมต่อมีปัญหา", Toast.LENGTH_LONG).show();
+                        } else {
+
+                            etName.setText(result.getHospitalName());
+                            etTel.setText(result.getHospitalTel());
+                            etWeb.setText(result.getHospitalWeb());
+
+                            for (int i = 0; i < amphoeList.size(); i++) {
+                                if (amphoeList.get(i).getAmphoeId() == result.getAmphoeId()){
+                                    amphoe.setSelection(i);
+                                }
+                            }
+
+                            for (int i = 0; i < specificList.size(); i++) {
+                                if (specificList.get(i).getSpecificId() == result.getSpecificId()){
+                                    select.setSelection(i);
+                                }
+                            }
+
+                            ((RadioButton)radio.getChildAt(result.getTypeId()-1)).setChecked(true);
+
+                            if (!TextUtils.isEmpty(result.getHospitalImg())) {
+                                Glide.with(getApplicationContext()).load(result.getHospitalImg()).into(gallary);
+                            }
 
                         }
+
                     }
                 });
     }
@@ -156,7 +204,7 @@ public class FormActivity extends BaseActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.gallary:
-                FormActivityPermissionsDispatcher.selectImageWithCheck(FormActivity.this);
+                FormEditActivityPermissionsDispatcher.selectImageWithCheck(FormEditActivity.this);
                 break;
             case R.id.btnSave:
                 save();
@@ -220,7 +268,7 @@ public class FormActivity extends BaseActivity {
 
     @NeedsPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)
     public void selectImage() {
-        EasyImage.openChooserWithGallery(FormActivity.this, "เลือกภาพ", 0);
+        EasyImage.openChooserWithGallery(FormEditActivity.this, "เลือกภาพ", 0);
     }
 
     @Override
@@ -260,7 +308,7 @@ public class FormActivity extends BaseActivity {
         PlacePicker.IntentBuilder builder = new PlacePicker.IntentBuilder();
 
         try {
-            startActivityForResult(builder.build(FormActivity.this), PLACE_PICKER_REQUEST);
+            startActivityForResult(builder.build(FormEditActivity.this), PLACE_PICKER_REQUEST);
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
         } catch (GooglePlayServicesNotAvailableException e) {

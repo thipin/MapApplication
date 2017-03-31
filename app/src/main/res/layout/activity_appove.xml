@@ -216,14 +216,21 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="ไม่อนุมัติการเบิก" />
+            android:text="ไม่อนุมัติ" />
 
         <Button
             android:id="@+id/btnT"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
-            android:text="อนุมัติการเบิก" />
+            android:text="อนุมัติ" />
+
+        <Button
+            android:id="@+id/btn_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:text="แก้ไข" />
     </LinearLayout>
 
 

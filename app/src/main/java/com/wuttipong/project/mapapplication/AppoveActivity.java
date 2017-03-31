@@ -73,7 +73,7 @@ public class AppoveActivity extends AppCompatActivity {
             }
         });
 
-
+        Button btn_edit = (Button) findViewById(R.id.btn_edit);
         ImageButton map = (ImageButton) findViewById(R.id.btn_map);
         map.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -112,6 +112,15 @@ public class AppoveActivity extends AppCompatActivity {
                     i.setData(Uri.parse("tel:"+detail.getHospitalTel()));
                     startActivity(i);
                 }
+            }
+        });
+
+        btn_edit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(AppoveActivity.this, FormEditActivity.class);
+                intent.putExtra("hospitalID",hospitalID);
+                startActivity(intent);
             }
         });
 
