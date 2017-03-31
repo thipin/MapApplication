@@ -237,7 +237,8 @@ public class FormEditActivity extends BaseActivity {
 
 
         Ion.with(getApplicationContext())
-                .load(ApiUrl.add_hospital())
+                .load(ApiUrl.update_hospital())
+                .setMultipartParameter("hospital_id",String.valueOf(hospitalID))
                 .setMultipartParameter("status", "0")
                 .setMultipartFile("img", file)
                 .setMultipartParameter("name", etName.getText().toString())
