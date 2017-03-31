@@ -1,7 +1,7 @@
 package com.wuttipong.project.mapapplication.api;
 
 public class ApiUrl {
-    public static final String BASEURL = "http://tub.theend3.com/api/";
+    public static final String BASEURL = "http://www.comdept.cmru.ac.th/55143534/api/";
 
     public static String login() {
         return BASEURL + "login.php";
@@ -49,6 +49,10 @@ public class ApiUrl {
 
     public static String update_hospital() {
         return BASEURL + "update_hospital.php";
+    }
+
+    public static String edit_hospital() {
+        return BASEURL + "edit_hospital.php";
     }
 
 }
