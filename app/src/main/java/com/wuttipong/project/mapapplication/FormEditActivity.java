@@ -163,6 +163,7 @@ public class FormEditActivity extends BaseActivity {
                             etName.setText(result.getHospitalName());
                             etTel.setText(result.getHospitalTel());
                             etWeb.setText(result.getHospitalWeb());
+                            tvLocaltion.setText("พิกัด : "+result.getHospitalLocaltion());
 
                             for (int i = 0; i < amphoeList.size(); i++) {
                                 if (amphoeList.get(i).getAmphoeId() == result.getAmphoeId()){
