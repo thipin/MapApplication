@@ -24,6 +24,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import com.koushikdutta.async.future.FutureCallback;
 import com.koushikdutta.ion.Ion;
+import com.koushikdutta.ion.builder.Builders;
 import com.wuttipong.project.mapapplication.api.ApiUrl;
 import com.wuttipong.project.mapapplication.model.Amphoe;
 import com.wuttipong.project.mapapplication.model.HospitalDetail;
@@ -83,7 +84,7 @@ public class FormEditActivity extends BaseActivity {
         showProgress();
 
         loadAmphoe();
-
+        Ion.getDefault(getApplicationContext()).configure().setLogging("MyLogs", Log.DEBUG);
         /*EasyImage.configuration(this)
                 .setAllowMultiplePickInGallery(false);*/
 
@@ -163,6 +164,7 @@ public class FormEditActivity extends BaseActivity {
                             etName.setText(result.getHospitalName());
                             etTel.setText(result.getHospitalTel());
                             etWeb.setText(result.getHospitalWeb());
+                            location = result.getHospitalLocaltion();
                             tvLocaltion.setText("พิกัด : "+result.getHospitalLocaltion());
 
                             for (int i = 0; i < amphoeList.size(); i++) {
@@ -215,10 +217,7 @@ public class FormEditActivity extends BaseActivity {
 
     private void save() {
 
-        if (file == null) {
-            Toast.makeText(getApplicationContext(), "ต้องเลือกรูปภาพ", Toast.LENGTH_LONG).show();
-            return;
-        }
+
 
         if (TextUtils.isEmpty(location)) {
             Toast.makeText(getApplicationContext(), "ต้องเลือกพิกัด", Toast.LENGTH_LONG).show();
@@ -235,23 +234,28 @@ public class FormEditActivity extends BaseActivity {
             return;
         }
 
-
-        Ion.with(getApplicationContext())
-                .load(ApiUrl.update_hospital())
-                .setMultipartParameter("hospital_id",String.valueOf(hospitalID))
-                .setMultipartParameter("status", "0")
-                .setMultipartFile("img", file)
+        Builders.Any.M updateAPIBuilder = Ion.with(getApplicationContext())
+                .load(ApiUrl.edit_hospital())
+                .setMultipartParameter("id", String.valueOf(hospitalID))
                 .setMultipartParameter("name", etName.getText().toString())
+                .setMultipartParameter("hospital_status", etName.getText().toString())
                 .setMultipartParameter("tel", etTel.getText().toString())
                 .setMultipartParameter("web", etWeb.getText().toString())
                 .setMultipartParameter("localtion", location)
                 .setMultipartParameter("amphoe_id", String.valueOf(amphoeList.get(amphoe.getSelectedItemPosition()).getAmphoeId()))
                 .setMultipartParameter("type_id", String.valueOf(typeID))
-                .setMultipartParameter("specific_id", String.valueOf(specificList.get(select.getSelectedItemPosition()).getSpecificId()))
-                .asJsonObject()
+                .setMultipartParameter("specific_id", String.valueOf(specificList.get(select.getSelectedItemPosition()).getSpecificId()));
+
+        if (file != null) {
+            updateAPIBuilder.setMultipartFile("img", file);
+        }
+
+        showProgress();
+        updateAPIBuilder.asJsonObject()
                 .setCallback(new FutureCallback<JsonObject>() {
                     @Override
                     public void onCompleted(Exception e, JsonObject result) {
+                        hideProgress();
                         if (e != null) {
                             e.printStackTrace();
                             Toast.makeText(getApplicationContext(), "การเชื่อมต่อมีปัญหา", Toast.LENGTH_SHORT).show();
