@@ -87,7 +87,6 @@ public class AppoveActivity extends AppCompatActivity {
 
         hospitalID = getIntent().getIntExtra("hospitalID",0);
 
-        loadData();
 
         txtWeb.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -124,6 +123,12 @@ public class AppoveActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        loadData();
     }
 
     private void appove(final int status) {
