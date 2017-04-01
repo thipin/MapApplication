@@ -120,6 +120,7 @@ public class AppoveActivity extends AppCompatActivity {
                 Intent intent = new Intent(AppoveActivity.this, FormEditActivity.class);
                 intent.putExtra("hospitalID",hospitalID);
                 startActivity(intent);
+                finish();
             }
         });
 
